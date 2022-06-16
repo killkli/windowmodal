@@ -24,42 +24,42 @@ export function Window(title, options) {
         }
     };
 
-    var self = this;
-    var container = null;
-    var num = Window.count++;
+    let self = this;
+    let container = null;
+    let num = Window.count++;
 
-    var living = true;
+    let living = true;
 
-    var events = {};
+    let events = {};
 
-    var display_state = WindowState.HIDDEN;
-    var size_state = WindowState.NORMAL;
+    let display_state = WindowState.HIDDEN;
+    let size_state = WindowState.NORMAL;
 
-    // var selected = false;
+    // let selected = false;
 
-    var size = {
+    let size = {
         width: 0,
         height: 0
     };
 
-    var position = {
+    let position = {
         x: 0,
         y: 0
     };
 
-    var drag_position = {
+    let drag_position = {
         x: 0,
         y: 0
     }
 
-    var resize_position = {
+    let resize_position = {
         x: 0,
         y: 0
     }
 
-    var current_resize = null;
+    let current_resize = null;
 
-    var cursor_resize = {
+    let cursor_resize = {
         "n": "ns-resize",
         "e": "ew-resize",
         "s": "ns-resize",
@@ -70,8 +70,8 @@ export function Window(title, options) {
         "nw": "nwse-resize"
     };
 
-    var mousedown_bar = false;
-    var mousedown_resize = false;
+    let mousedown_bar = false;
+    let mousedown_resize = false;
 
     this.content = null;
 
@@ -246,7 +246,7 @@ export function Window(title, options) {
         }
 
         if (container == null) {
-            var outer = WindowUtil.getProperty(options, "container", document.body);
+            let outer = WindowUtil.getProperty(options, "container", document.body);
             container = document.createElement("div");
             container.id = "window_" + num;
             container.className = container.id + "_window";
@@ -271,28 +271,28 @@ export function Window(title, options) {
 
         container.innerHTML = "";
 
-        var bar = document.createElement("div");
+        let bar = document.createElement("div");
         bar.className = "window_bar";
 
-        var icon = document.createElement("span");
+        let icon = document.createElement("span");
         icon.className = "window_icon";
         icon.innerHTML = WindowUtil.getProperty(options, "icon", "");
 
-        var title_bar = document.createElement("span");
+        let title_bar = document.createElement("span");
         title_bar.className = "window_title";
         title_bar.innerHTML = title;
 
-        var toggle_win = document.createElement("div");
+        let toggle_win = document.createElement("div");
         toggle_win.className = "window_toggle_buttons";
 
-        var toggle_min = document.createElement("span");
+        let toggle_min = document.createElement("span");
         toggle_min.className = "window_button_minimize";
         toggle_min.innerHTML = WindowUtil.getProperty(options, "minimize_icon", "_");
 
-        var toggle_max = document.createElement("span");
+        let toggle_max = document.createElement("span");
         toggle_max.className = "window_button_toggle_maximize";
 
-        var toggle_close = document.createElement("span");
+        let toggle_close = document.createElement("span");
         toggle_close.className = "window_button_close";
         toggle_close.innerHTML = WindowUtil.getProperty(options, "close_icon", "&#9587;");
 
@@ -306,11 +306,11 @@ export function Window(title, options) {
 
         container.appendChild(bar);
 
-        var resize_handles = new Array();
-        var resize_pos = ["n", "ne", "e", "se", "s", "sw", "w", "nw"];
+        let resize_handles = new Array();
+        let resize_pos = ["n", "ne", "e", "se", "s", "sw", "w", "nw"];
 
-        for (var i = 0; i < 8; i++) {
-            var handle = document.createElement("div");
+        for (let i = 0; i < 8; i++) {
+            let handle = document.createElement("div");
             handle.className = "window_resize_handle window_resize_handle_" + resize_pos[i];
             handle.setAttribute("data-resize", resize_pos[i]);
             handle.addEventListener("mousedown", resize_mouseDown);
@@ -330,7 +330,7 @@ export function Window(title, options) {
 
         container.appendChild(this.content);
 
-        var clicks_bar = 0;
+        let clicks_bar = 0;
 
         bar.addEventListener("mousedown", function (e) {
             if (e.button != 0) {
@@ -340,7 +340,7 @@ export function Window(title, options) {
             mousedown_bar = true;
 
             if (WindowUtil.getProperty(options, "movable", true)) {
-                var target = e.target;
+                let target = e.target;
 
                 while (target != bar) {
                     if (target != toggle_min && target != toggle_max && target != toggle_close) {
@@ -455,11 +455,11 @@ export function Window(title, options) {
             return;
         }
 
-        var delta_x = 0;
-        var delta_y = 0;
+        let delta_x = 0;
+        let delta_y = 0;
 
-        var min_size = WindowUtil.getProperty(options, "min_size", { width: 200, height: 150 });
-        var max_size = WindowUtil.getProperty(options, "max_size", "");
+        let min_size = WindowUtil.getProperty(options, "min_size", { width: 200, height: 150 });
+        let max_size = WindowUtil.getProperty(options, "max_size", "");
 
         if (current_resize == "nw" || current_resize == "n" || current_resize == "ne") {
             if (size.height > min_size.height || e.clientY < options.position.y) {
@@ -520,7 +520,7 @@ export function Window(title, options) {
 
             self.normalSize();
 
-            var _bar = container.getElementsByClassName('window_bar')[0];
+            let _bar = container.getElementsByClassName('window_bar')[0];
 
             self.changeOption("position", {
                 x: e.clientX - (_bar.offsetWidth / 2),
@@ -537,8 +537,8 @@ export function Window(title, options) {
             return;
         }
 
-        var delta_x = drag_position.x - e.clientX;
-        var delta_y = drag_position.y - e.clientY;
+        let delta_x = drag_position.x - e.clientX;
+        let delta_y = drag_position.y - e.clientY;
 
         drag_position.x = e.clientX;
         drag_position.y = e.clientY;
@@ -605,7 +605,7 @@ export function Window(title, options) {
 
     function changeSizeState(_size_state) {
         container.classList.remove("window_maximized");
-        var toggle_max = container.getElementsByClassName('window_button_toggle_maximize')[0];
+        let toggle_max = container.getElementsByClassName('window_button_toggle_maximize')[0];
 
         switch (_size_state) {
             case WindowState.MAXIMIZED: {
@@ -652,14 +652,14 @@ export function Window(title, options) {
             return;
         }
 
-        var _size = WindowUtil.getProperty(options, "size", "");
+        let _size = WindowUtil.getProperty(options, "size", "");
 
         if (_size == "") {
             options.size = { width: 200, height: 150 };
             _size = options.size;
         }
 
-        var old_size = {
+        let old_size = {
             width: options.size.width,
             height: options.size.height
         };
@@ -667,12 +667,12 @@ export function Window(title, options) {
         size.width = WindowUtil.getProperty(_size, "width", 200);
         size.height = WindowUtil.getProperty(_size, "height", 150);
 
-        var _min_size = WindowUtil.getProperty(options, "min_size", { width: 200, height: 150 });
-        var _max_size = WindowUtil.getProperty(options, "max_size", "");
+        let _min_size = WindowUtil.getProperty(options, "min_size", { width: 200, height: 150 });
+        let _max_size = WindowUtil.getProperty(options, "max_size", "");
 
         if (_min_size != "") {
-            var _min_width = WindowUtil.getProperty(_min_size, "width", "");
-            var _min_height = WindowUtil.getProperty(_min_size, "height", "");
+            let _min_width = WindowUtil.getProperty(_min_size, "width", "");
+            let _min_height = WindowUtil.getProperty(_min_size, "height", "");
 
             if (_min_width != "") {
                 if (size.width < _min_width) {
@@ -690,8 +690,8 @@ export function Window(title, options) {
         }
 
         if (_max_size != "") {
-            var _max_width = WindowUtil.getProperty(_max_size, "width", "");
-            var _max_height = WindowUtil.getProperty(_max_size, "height", "");
+            let _max_width = WindowUtil.getProperty(_max_size, "width", "");
+            let _max_height = WindowUtil.getProperty(_max_size, "height", "");
 
             if (_max_width != "") {
                 if (size.width > _max_width) {
@@ -708,7 +708,7 @@ export function Window(title, options) {
             }
         }
 
-        var parent = container.parentElement;
+        let parent = container.parentElement;
 
         if (size.height > parent.offsetHeight) {
             size.height = parent.offsetHeight;
@@ -737,7 +737,7 @@ export function Window(title, options) {
 
         self.on("update_selected")();
 
-        var _selected = WindowUtil.getProperty(options, "selected", false);
+        let _selected = WindowUtil.getProperty(options, "selected", false);
 
         if (_selected) {
             container.classList.add("window_selected");
@@ -816,7 +816,7 @@ export function Window(title, options) {
             return;
         }
 
-        var parent = container.parentElement;
+        let parent = container.parentElement;
 
         if (typeof options.position.x !== "number") {
             options.position.x = (parent.offsetWidth / 2 - container.offsetWidth / 2);
@@ -825,9 +825,9 @@ export function Window(title, options) {
             options.position.y = (parent.offsetHeight / 2 - container.offsetHeight / 2);
         }
 
-        var _position = options.position;
+        let _position = options.position;
 
-        var old_position = {
+        let old_position = {
             x: options.position.x,
             y: options.position.y
         }
@@ -860,11 +860,11 @@ export function Window(title, options) {
     }
 
     function updateEvents() {
-        var ev = WindowUtil.getProperty(options, "events", {});
+        let ev = WindowUtil.getProperty(options, "events", {});
 
-        var keys = Object.keys(ev);
+        let keys = Object.keys(ev);
 
-        for (var i = 0; i < keys.length; i++) {
+        for (let i = 0; i < keys.length; i++) {
             events[keys[i]] = ev[keys[i]];
         }
     }
@@ -1045,7 +1045,7 @@ export function Window(title, options) {
     }
 
     this.close = function () {
-        var close_option = WindowUtil.getProperty(options, "close_action", Window.DISPOSE_ON_CLOSE);
+        let close_option = WindowUtil.getProperty(options, "close_action", Window.DISPOSE_ON_CLOSE);
         if (!living || close_option == Window.DO_NOTHING_ON_CLOSE) {
             return;
         }
@@ -1099,7 +1099,7 @@ export function Window(title, options) {
             `.${uniqueID}_window{
   border: 1px solid #ccc;
   position: absolute;
-  z-index: 1;
+  z-index: 99999;
   border-radius: 2px;
   box-sizing: border-box;
 

@@ -1099,7 +1099,7 @@ export function Window(title, options) {
             `.${uniqueID}_window{
   border: 1px solid #ccc;
   position: absolute;
-  z-index: 99999;
+  z-index: 200;
   border-radius: 2px;
   box-sizing: border-box;
 
@@ -1114,10 +1114,10 @@ export function Window(title, options) {
   box-sizing: border-box;
 }`,
             `.${uniqueID}_window.window_alway_on_top{
-  z-index: 10;
+  z-index: 210;
 }`,
             `.${uniqueID}_window.window_alway_on_top.window_selected{
-  z-index: 11;
+  z-index: 211;
 }`,
             `.${uniqueID}_window .window_bar{
   border-bottom: 1px solid #ccc;
@@ -1156,7 +1156,7 @@ export function Window(title, options) {
   right: 0;
   vertical-align: top;
   margin-left: 10px;
-  z-index: 2;
+  z-index: 202;
 }`,
             `.${uniqueID}_window .window_bar .window_toggle_buttons:after{
   clear: both;
@@ -1209,7 +1209,7 @@ export function Window(title, options) {
   -webkit-box-shadow: 0px 0px 17px -4px rgba(0,0,0,0.73);
   -moz-box-shadow: 0px 0px 17px -4px rgba(0,0,0,0.73);
   box-shadow: 0px 0px 17px -4px rgba(0,0,0,0.73);
-  z-index: 2;
+  z-index: 202;
 }`,
             `.${uniqueID}_window.window_selected .window_bar{
   background-color: #ddd;
